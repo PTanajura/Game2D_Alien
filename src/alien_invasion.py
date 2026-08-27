@@ -151,7 +151,7 @@ class AlienInvasion:
         """Cria um laço de repetição para a tela sempre ficar visível até
         que o usuário decida fechar a janela."""
 
-        self.create_fleet()  # Cria a frota de alienígenas para ser desenhada na tela
+        self.create_fleet()  # Cria a frota de alienígenas para ser desenhada na tela!
 
         while True:
             self._check_events()
