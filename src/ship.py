@@ -10,7 +10,8 @@ class Ship:
         self.screen_rect = self.screen.get_rect() # Rect é uma estrutura usada para representar posições e áreas retangulares
         
         # Carrega a imagem da nave e obtém seu rect
-        self.image = pygame.image.load('../images/ship.bmp')
+        self.image = pygame.image.load('../images/goku.bmp')
+        self.image = pygame.transform.scale(self.image, (60, 60))
         # o pygame trata os elementos como retangulos, tornando seu processamento eficiente
         self.rect = self.image.get_rect()
         # Posiciona a nave no centro inferior da tela

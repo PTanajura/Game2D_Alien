@@ -1,6 +1,4 @@
-from abc import ABC, abstractmethod
-
-class Desconto(ABC):
+class IDesconto:
 
     """
     def calcular(self, tipo, valor):
@@ -11,31 +9,49 @@ class Desconto(ABC):
         elif tipo == "premium":
            return valor * 0.3
     """
-
-    @abstractmethod
     def calcular(self, valor):
-        pass
+        raise NotImplementedError
+    
+class ICupom:
+    def aplicar_cupom(self, codigo):
+        raise NotImplementedError
 
-class DescontoNormal(Desconto):
+class IVIP:
+    def validar_usuario_vip(self, usuario):
+        raise NotImplementedError
+
+class DescontoNormal(IDesconto):
     def calcular(self, valor):
         return valor * 0.1
 
-class DescontoVip(Desconto):
+class DescontoVip(IDesconto, ICupom, IVIP):
     def calcular(self, valor):
         return valor * 0.2
 
-class DescontoPremium(Desconto):
+    def aplicar_cupom(self, codigo):
+        return True
+
+    def validar_usuario_vip(self, usuario):
+        return usuario == "vip"
+
+class DescontoPremium(IDesconto):
     def calcular(self, valor):
         return valor * 0.3
+
+def aplicar_desconto(desconto: IDesconto, valor: float) -> float:
+    return desconto.calcular(valor)
+
+def aplicar_cupom(cupom: ICupom, codigo: str) -> bool:
+    return cupom.aplicar_cupom(codigo)
 
 def main():
     valor = 100
 
-    desconto_normal = DescontoNormal()
-    desconto_vip = DescontoVip()
-    desconto_premium = DescontoPremium()
+    normal = DescontoNormal()
+    vip = DescontoVip()
 
-    print(f"Desconto Normal: R$ {desconto_normal.calcular(valor):.2f}")
-    print(f"Desconto VIP: R$ {desconto_vip.calcular(valor):.2f}")
-    print(f"Desconto Premium: R$ {desconto_premium.calcular(valor):.2f}")
+    print("Desconto Normal:", aplicar_desconto(normal, valor))
+    print("Desconto VIP:", aplicar_desconto(vip, valor))
+    print("Cupom VIP:", aplicar_cupom(vip, "DESC10"))
+
 
