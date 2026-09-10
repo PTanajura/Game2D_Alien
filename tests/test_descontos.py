@@ -1,12 +1,14 @@
 import pytest
 from src.desconto import DescontoNormal, DescontoVip, DescontoPremium
 
+#Parametrize
 @pytest.mark.parametrize("valor, esperado", [
     (100, 30),
     (200, 60),
     (300, 90)
 ])
 
+#Assert
 def test_desconto_premium(valor, esperado):
     desconto = DescontoPremium()
     resultado = desconto.calcular(valor)
@@ -17,6 +19,7 @@ def test_desconto_normal():
     resultado = desconto.calcular(100)
     assert resultado == 10.0
 
+#Fixture
 @pytest.fixture
 def desconto_vip():
     return DescontoVip()

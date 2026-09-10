@@ -12,9 +12,17 @@ class Bullet(Sprite):
         self.screen = alien_invasion_screen
         self.settings = alien_invasion_settings
         self.ship = alien_invasion_ship
+
+        '''
         self.color = self.settings.bullet_color
         # Cria um rect para o projétil em (0, 0) e depois define a posição correta
         self.rect = pygame.Rect(0, 0, self.settings.bullet_width, self.settings.bullet_height)
+        '''
+
+        self.image = pygame.image.load("../images/bloqueio.bmp")
+        self.image = pygame.transform.scale(self.image, (60, 60))
+        self.rect = self.image.get_rect()
+        
         self.rect.midtop = self.ship.rect.midtop # Posiciona o projétil na parte superior da nave
         self.y = float(self.rect.y) # Armazena a posição vertical do projétil como um número de ponto flutuante para permitir movimentos suaves
         
@@ -26,4 +34,5 @@ class Bullet(Sprite):
         
     def draw_bullet(self):
         """Desenha o projétil na tela."""
-        pygame.draw.rect(self.screen, self.color, self.rect) # Desenha um retângulo representando o projétil na tela usando as coordenadas do rect
+        # pygame.draw.rect(self.screen, self.color, self.rect) # Desenha um retângulo representando o projétil na tela usando as coordenadas do rect
+        self.screen.blit(self.image, self.rect) # Desenha a imagem do projétil na tela usando as coordenadas do rect

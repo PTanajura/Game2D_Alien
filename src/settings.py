@@ -16,7 +16,7 @@ class Settings:
         self.bullet_allowed = 1 # Número máximo de projéteis que podem existir na tela ao mesmo tempo
         
         # Configurações do alien
-        self.alien_speed = .3 # Velocidade dos alienígenas
+        self.alien_speed = .5 # Velocidade dos alienígenas
         self.fleet_drop_speed = 10 # Velocidade com que a frota de alienígenas desce em direção à nave
         self.fleet_direction = 1 # Direção da frota de alienígenas: 1 representa a direita; -1 representa a esquerda
 
