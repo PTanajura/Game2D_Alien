@@ -1,6 +1,7 @@
 import pygame
-from settings import Settings
-from ship import Ship
+from src.ship import Ship
+from src.settings import Settings
+
 
 def test_ship_move_direita():
     pygame.init()

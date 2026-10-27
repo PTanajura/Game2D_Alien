@@ -1,5 +1,5 @@
-from desconto import Pedido
-from doubles import StubSemDesconto
+from tests.doubles import StubSemDesconto
+from src.desconto import Pedido
 
 
 def test_pedido_com_stub():
