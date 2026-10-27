@@ -1,14 +1,12 @@
-import sys
 import pygame
-
-from settings import Settings
-from ship import Ship
 
 from bullet_manager import BulletManager
 from fleet_manager import FleetManager
 from game_events import GameEventHandler
 from game_renderer import GameRenderer
+from settings import Settings
 
+from ship import Ship
 from alien import Alien
 from fast_alien import FastAlien
 
@@ -50,13 +48,13 @@ class AlienInvasion:
 
     def run_game(self) -> None:
         """Cria um laço de repetição para a tela sempre ficar visível até que o usuário decida fechar a janela."""
-        
-        self.fleet_manager.create_fleet() # Cria a frota de alienígenas para ser des
+        self.fleet_manager.create_fleet()  # Cria a frota de alienígenas para ser des
 
         while True:
             self.event_handler._check_events()
             self._update_game_state()
             self.renderer._render_screen()
+
 
 if __name__ == "__main__":
     alien_invasion = AlienInvasion()

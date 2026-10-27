@@ -1,4 +1,4 @@
-import sys
+import sys 
 import pygame
 
 class GameEventHandler:
@@ -30,3 +30,6 @@ class GameEventHandler:
     def _handle_keyup(self, event: pygame.event.Event) -> None:
         """Responde a eventos de soltura de teclas."""
         if event.key == pygame.K_RIGHT:
+            self.ship.moving_right = False
+        elif event.key == pygame.K_LEFT:
+            self.ship.moving_left = False

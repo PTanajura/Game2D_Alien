@@ -1,14 +1,16 @@
-import sys
-from alien import Alien
+import sys 
 import pygame
+
+from alien import Alien
 
 class FleetManager:
     """Responsável por criar e gerenciar a frota de alienígenas."""
-    def __init__(self, screen, settings, ship) -> None:
+    def __init__(self, screen, settings, ship, alien_class=Alien) -> None:
         self.screen = screen
         self.settings = settings
         self.ship = ship
         self.aliens = pygame.sprite.Group()
+        self.alien_class = alien_class
 
     def _create_alien(self, alien_number: int, row_number: int, alien_width: int, alien_height: int) -> None:
         """Cria um alienígena e o posiciona na linha."""
@@ -25,15 +27,18 @@ class FleetManager:
         """Cria uma frota de alienígenas."""
         # Cria um alienígena e calcula o número de alienígenas em uma linha
         # O espaçamento entre os alienígenas é igual a um alienígena
-        alien = self.aliens_class(self.screen, self.settings)
+        alien = self.alien_class(self.screen, self.settings)
         alien_width = alien.rect.width
         alien_height = alien.rect.height
+
         available_space_x = self.settings.screen_width - (2 * alien_width)
         number_aliens_x = available_space_x // (2 * alien_width)
+
         ship_height = self.ship.rect.height
         available_space_y = (
             self.settings.screen_height - (3 * alien_height) - ship_height
         )
+
         number_rows = available_space_y // (2 * alien_height)
 
         for row_number in range(number_rows):
@@ -41,9 +46,10 @@ class FleetManager:
             for alien_number in range(number_aliens_x):
                 # Cria um alienígena e o posiciona na linha
                 self._create_alien(alien_number, row_number, alien_width, alien_height)
+                self.aliens.add(alien)
 
     def _update_aliens(self) -> None:
-        """Verifica se a frota de alienígenas está em uma borda, então atualiza as posições de todos os alienígenas na frota."""
+        """Verifica se a frota de alienígenas está em uma borda, então atualiza as posições"""
         self._check_fleet_edges()
         self.aliens.update()
         self._check_ship_collision()
