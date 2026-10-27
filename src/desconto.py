@@ -1,36 +1,31 @@
-from abc import ABC, abstractmethod
-
-# Classe abstrata que define o contrat
-class Desconto(ABC):
-    @abstractmethod
+class IDesconto:
     def calcular(self, valor):
-        pass
+        raise NotImplementedError
 
-# Implementação para cliente normal
-class DescontoNormal(Desconto):
+
+class DescontoNormal(IDesconto):
     def calcular(self, valor):
         return valor * 0.1
 
-# Implementação para cliente VIP
-class DescontoVIP(Desconto):
+
+class DescontoVIP(IDesconto):
     def calcular(self, valor):
         return valor * 0.2
 
-# Implementação para cliente Premium
-class DescontoPremium(Desconto):
-    def calcular(self, valor):
-        return valor * 0.3
 
-def main():
-    valor = 100
+class Pedido:
+    def __init__(self, desconto: IDesconto):
+        self.desconto = desconto
 
-    normal = DescontoNormal()
-    vip = DescontoVIP()
-    premium = DescontoPremium()
+    def total(self, valor):
+        return valor - self.desconto.calcular(valor)
 
-    print(f"Desconto Normal: R$ {normal.calcular(valor):.2f}")
-    print(f"Desconto VIP: R$ {vip.calcular(valor):.2f}")
-    print(f"Desconto Premium: R$ {premium.calcular(valor):.2f}")
 
 if __name__ == "__main__":
-    main()
+    valor = 100
+
+    pedido_normal = Pedido(DescontoNormal())
+    pedido_vip = Pedido(DescontoVIP())
+
+    print("Normal:", pedido_normal.total(valor))
+    print("VIP:", pedido_vip.total(valor))
