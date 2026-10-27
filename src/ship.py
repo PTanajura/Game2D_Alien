@@ -1,7 +1,5 @@
-import pygame
-from pygame.surface import Surface
+import pygame 
 from settings import Settings
-
 
 class Ship:
     """Gerencia a nave espacial."""
